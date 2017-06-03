@@ -1,6 +1,6 @@
 class Like < ApplicationRecord
 
-  validates :user_id, :presence => true, :uniqueness {:scope => :content}
+  validates :user_id, :uniqueness => {:scope => :content_id, :message => "already liked this photo!"}
   validates :content_id, :presence => true
 
 
