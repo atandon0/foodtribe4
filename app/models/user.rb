@@ -4,11 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
 
+  validates :username, :presence => true, :uniqueness => true
+
   has_many :contents
   has_many :likes
   has_many :comments
 
-  has_many :liked_contents, :through => :contents, :source => :photo_video
+  has_many :liked_contents, :through => :contents, :source => :content
 
   has_many :friend_requests_where_sender, :class_name => "FriendRequest", :foreign_key => "sender_id"
 
@@ -18,6 +20,6 @@ class User < ApplicationRecord
 
   has_many :friends_where_receiver, :through => :friend_requests_where_receiver, :source => :sender
 
-  has_many :follows, , :through => :friends_where_sender, :source => :statuses
+  has_many :follows, :through => :friends_where_sender, :source => :content
 
 end

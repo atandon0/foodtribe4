@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  root "contents#index"
+
   # Routes for the Special_diet resource:
   # CREATE
   get "/special_diets/new", :controller => "special_diets", :action => "new"
