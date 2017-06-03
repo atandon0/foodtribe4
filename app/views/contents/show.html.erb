@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h3>Content #<%= @content.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Photo video</dt>
+      <dd><%= @content.photo_video %></dd>
+
+      <dt>Description</dt>
+      <dd><%= @content.description %></dd>
+
+      <dt>User</dt>
+      <dd><%= @content.user_id %></dd>
+
+      <dt>Caption</dt>
+      <dd><%= @content.caption %></dd>
+
+      <dt>Occassion</dt>
+      <dd><%= @content.occassion_id %></dd>
+
+      <dt>Special diet</dt>
+      <dd><%= @content.special_diet_id %></dd>
+
+      <dt>Cuisine</dt>
+      <dd><%= @content.cuisine_id %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/contents" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/contents/<%= @content.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_content/<%= @content.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

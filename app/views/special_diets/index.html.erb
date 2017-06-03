@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1>
+    Special diets
+    <a href="/special_diets/new" class="btn btn-lg btn-success">New Special diet</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Special diet name</th>
+        <th>Photo</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @special_diets.each do |special_diet| %>
+      <tr>
+        <td><%= special_diet.special_diet_name %></td>
+        <td><%= special_diet.photo %></td>
+        <td>
+          <a href="/special_diets/<%= special_diet.id %>" class="btn btn-primary">Show</a>
+          <a href="/special_diets/<%= special_diet.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_special_diet/<%= special_diet.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
