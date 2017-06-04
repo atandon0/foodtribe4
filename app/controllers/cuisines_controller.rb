@@ -1,6 +1,8 @@
 class CuisinesController < ApplicationController
   def index
     @cuisines = Cuisine.all
+    @counter = 0
+  
 
     render("cuisines/index.html.erb")
   end

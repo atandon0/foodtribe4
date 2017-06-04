@@ -28,3 +28,25 @@
     </table>
   </div>
 </div>
+
+
+<div class = "container">
+<div class="row">
+
+
+  <% @cuisines.order('cuisine_name').each do |cuisine| %>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <a href="/cuisines/<%= cuisine.id %>"> <img src="<%= cuisine.photo %>" class = "img-responsive"> </a>
+      <div class="caption">
+        <a href="/cuisines/<%= cuisine.id %>"> <h3><%= cuisine.cuisine_name %></h3> </a>
+      </div>
+    </div>
+  </div>
+  <% @counter = @counter + 1 %>
+  <% if @counter%3 == 0 %>
+</div>
+<% end  %>
+<% end  %>
+</div>
+</div>
