@@ -20,6 +20,6 @@ class User < ApplicationRecord
 
   has_many :friends_where_receiver, :through => :friend_requests_where_receiver, :source => :sender
 
-  has_many :follows, :through => :friends_where_sender, :source => :content
+  has_many :follows, :through => :friends_where_sender, :source => :contents
 
 end
