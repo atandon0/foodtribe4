@@ -6,6 +6,7 @@ class Like < ApplicationRecord
 
 
   belongs_to :user
-  belongs_to :content
+  belongs_to :content, :class_name => "Content", :foreign_key => "content_id"
+
 
 end

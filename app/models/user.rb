@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :username, :presence => true, :uniqueness => true
 
   has_many :contents
-  has_many :likes
+  has_many :likes, :class_name => "Like", :foreign_key => "user_id"
   has_many :comments
 
   has_many :liked_contents, :through => :contents, :source => :content

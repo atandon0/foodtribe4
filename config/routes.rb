@@ -2,6 +2,12 @@ Rails.application.routes.draw do
 
   root "contents#index"
 
+
+  #My likes
+  # READ
+  get "/my_likes", :controller => "my_likes", :action => "index"
+
+
   # Routes for the Special_diet resource:
   # CREATE
   get "/special_diets/new", :controller => "special_diets", :action => "new"
