@@ -1,15 +1,15 @@
 <!-- Validation failure messages -->
 <% if @content.errors.any? %>
-  <% @content.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
+<% @content.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
 <div class="page-header">
-  <h3>Edit Content #<%= @content.id %></h3>
+  <h3>Edit Content </h3>
 </div>
 
 <div class="row">
@@ -18,10 +18,20 @@
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
+      <!-- Label and input for caption -->
+      <div class="form-group">
+        <label for="caption" class="control-label">
+          Caption (Required)
+        </label>
+
+        <input type="text" id="caption" name="caption" placeholder="Caption" class="form-control" value="<%= @content.caption %>">
+      </div>
+
+
       <!-- Label and input for photo_video -->
       <div class="form-group">
         <label for="photo_video" class="control-label">
-          Photo video
+          Image/Video (Required)
         </label>
 
         <input type="text" id="photo_video" name="photo_video" placeholder="Photo video" class="form-control" value="<%= @content.photo_video %>">
@@ -30,62 +40,51 @@
       <!-- Label and input for description -->
       <div class="form-group">
         <label for="description" class="control-label">
-          Description
+          Description (Required)
         </label>
 
         <textarea id="description" name="description" placeholder="Description" class="form-control" rows="3"><%= @content.description %></textarea>
       </div>
 
       <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
 
-        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @content.user_id %>">
-      </div>
-
-      <!-- Label and input for caption -->
-      <div class="form-group">
-        <label for="caption" class="control-label">
-          Caption
-        </label>
-
-        <input type="text" id="caption" name="caption" placeholder="Caption" class="form-control" value="<%= @content.caption %>">
-      </div>
-
-      <!-- Label and input for occassion_id -->
-      <div class="form-group">
-        <label for="occassion_id" class="control-label">
-          Occassion
-        </label>
-
-        <input type="text" id="occassion_id" name="occassion_id" placeholder="Occassion" class="form-control" value="<%= @content.occassion_id %>">
-      </div>
-
-      <!-- Label and input for special_diet_id -->
-      <div class="form-group">
-        <label for="special_diet_id" class="control-label">
-          Special diet
-        </label>
-
-        <input type="text" id="special_diet_id" name="special_diet_id" placeholder="Special diet" class="form-control" value="<%= @content.special_diet_id %>">
-      </div>
+      <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @content.user_id %>">
 
       <!-- Label and input for cuisine_id -->
       <div class="form-group">
         <label for="cuisine_id" class="control-label">
-          Cuisine
+          Cuisine (Required)
         </label>
 
-        <input type="text" id="cuisine_id" name="cuisine_id" placeholder="Cuisine" class="form-control" value="<%= @content.cuisine_id %>">
+        <%= select_tag("cuisine_id", options_from_collection_for_select(Cuisine.order('cuisine_name asc'), :id, :cuisine_name, @content.cuisine_id), :class => "form-control") %> <a href="/cuisines/new"> New Cuisine </a>
       </div>
 
-      <button class="btn btn-warning">
-        Update Content
-      </button>
-      or
-      <a href="/contents/<%= @content.id %>">Cancel</a>
-    </form>
+
+      <!-- Label and input for occassion_id -->
+      <div class="form-group">
+        <label for="occassion_id" class="control-label">
+          Occassion (Required)
+        </label>
+
+        <%= select_tag("occassion_id", options_from_collection_for_select(Occassion.order('occassion_name asc'), :id, :occassion_name, @content.occassion_id), :class => "form-control") %> <a href="/occassions/new"> New Occassion </a>
+      </div>
+
+
+      <!-- Label and input for special_diet_id -->
+      <div class="form-group">
+        <label for="special_diet_id" class="control-label">
+          Special Diet (Optional)
+        </label>
+
+        <%= select_tag("special_diet_id", options_from_collection_for_select(SpecialDiet.order('special_diet_name asc'), :id, :special_diet_name, @content.special_diet_id), :class => "form-control") %> <a href="/specialdiets/new"> New Special Diet </a>
+
+      </div>
+
+        <button class="btn btn-warning">
+          Update Content
+        </button>
+        or
+        <a href="/contents/<%= @content.id %>">Cancel</a>
+      </form>
+    </div>
   </div>
-</div>
