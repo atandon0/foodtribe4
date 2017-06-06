@@ -11,8 +11,12 @@ Rails.application.routes.draw do
   #READ
   get "/follows", :controller => "follows", :action => "index"
 
-  #DELETE
-  get "/delete_follow", :controller => "follows", :action => "destroy"
+  #Users
+  #SHOW
+  get "/users/:id", :controller => "usersb", :action => "show"
+
+
+  #------------------------------
 
   # Routes for the Special_diet resource:
   # CREATE
