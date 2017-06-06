@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   #Users
   #SHOW
-  get "/users/:id", :controller => "usersb", :action => "show"
+  get "/usersb/:id", :controller => "usersb", :action => "show"
 
 
   #------------------------------

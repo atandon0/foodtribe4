@@ -14,7 +14,7 @@
     <div class="panel panel-default">
 
       <div class="panel-heading">
-        <h3 class="panel-title"> <a href = "/users/<%= content.user.id %>"> <%= content.user.username %> </a>
+        <h3 class="panel-title"> <a href = "/usersb/<%= content.user.id %>"> <%= content.user.username %> </a>
           <small> <%= time_ago_in_words(content.created_at) %> ago </small>
         </h3>
 
@@ -74,7 +74,7 @@
                 <li class="media">
                   <div class="media-body">
                     <h6 class="media-heading">
-                      <a href = "/users/<%= comment.user_id%>"> <%= comment.user.username %> </a>
+                      <a href = "/usersb/<%= comment.user_id%>"> <%= comment.user.username %> </a>
                       <small> <%= time_ago_in_words(comment.created_at) %> ago </small>
                     </h6>
                     <%= comment.body %>
