@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   #SHOW
   get "/usersb/:id", :controller => "usersb", :action => "show"
 
+  #My contents
+  #SHOW
+  get "/my_contents", :controller => "my_contents", :action => "index"
 
   #------------------------------
 

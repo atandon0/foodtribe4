@@ -4,7 +4,7 @@ class Content < ApplicationRecord
   validates :caption, :presence => true
   validates :cuisine_id, :presence => true
   validates :occassion_id, :presence => true
-
+  validates :special_diet_id, :presence => true
 
   belongs_to :user
   has_many :likes

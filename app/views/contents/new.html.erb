@@ -30,7 +30,7 @@
       <!-- Label and input for photo_video -->
       <div class="form-group">
         <label for="photo_video" class="control-label">
-          Post an image or video
+          Post an image or video (Required)
         </label>
 
         <input type="text" id="photo_video" name="photo_video" placeholder="Photo video" class="form-control" value="<%= @content.photo_video %>">
@@ -39,7 +39,7 @@
       <!-- Label and input for description -->
       <div class="form-group">
         <label for="description" class="control-label">
-          Description - recipes, image or video description
+          Additional Description - recipes, image or video description (Optional)
         </label>
 
         <textarea id="description" name="description" placeholder="Description" class="form-control" rows="3"><%= @content.description %></textarea>
@@ -57,7 +57,7 @@
           Cuisine (Required)
         </label>
 
-        <%= select_tag("cuisine_id", options_from_collection_for_select(Cuisine.order('cuisine_name asc'), :id, :cuisine_name), :include_blank =>true, :class => "form-control") %> <a href="/cuisines/new"> New Cuisine </a>
+        <%= select_tag("cuisine_id", options_from_collection_for_select(Cuisine.order('cuisine_name asc'), :id, :cuisine_name), :class => "form-control") %> 
 
       </div>
 
@@ -67,16 +67,16 @@
           Occassion (Required)
         </label>
 
-        <%= select_tag("occassion_id", options_from_collection_for_select(Occassion.order('occassion_name asc'), :id, :occassion_name), :include_blank =>true, :class => "form-control") %> <a href="/occassions/new"> New Occassion </a>
+        <%= select_tag("occassion_id", options_from_collection_for_select(Occassion.order('occassion_name asc'), :id, :occassion_name), :class => "form-control") %>
       </div>
 
       <!-- Label and input for special_diet_id -->
       <div class="form-group">
         <label for="special_diet_id" class="control-label">
-          Special diet (Optional)
+          Special diet (Required)
         </label>
 
-        <%= select_tag("special_diet_id", options_from_collection_for_select(SpecialDiet.order('special_diet_name asc'), :id, :special_diet_name), :include_blank =>true, :class => "form-control") %> <a href="/specialdiets/new"> New Occassion </a>
+        <%= select_tag("special_diet_id", options_from_collection_for_select(SpecialDiet.order('special_diet_name asc'), :id, :special_diet_name), :class => "form-control") %>
 
       </div>
 
