@@ -26,7 +26,7 @@ class FriendRequestsController < ApplicationController
     save_status = @friend_request.save
 
     if save_status == true
-      redirect_to("/follows", :notice => "Friend request created successfully.")
+      redirect_to("/follows", :notice => "Followed successfully.")
     else
       render("friend_requests/new.html.erb")
     end
@@ -47,7 +47,7 @@ class FriendRequestsController < ApplicationController
     save_status = @friend_request.save
 
     if save_status == true
-      redirect_to("/friend_requests/#{@friend_request.id}", :notice => "Friend request updated successfully.")
+      redirect_to("/friend_requests/#{@friend_request.id}", :notice => "Followed successfully.")
     else
       render("friend_requests/edit.html.erb")
     end
@@ -59,9 +59,9 @@ class FriendRequestsController < ApplicationController
     @friend_request.destroy
 
     if URI(request.referer).path == "/friend_requests/#{@friend_request.id}"
-      redirect_to("/", :notice => "Friend request deleted.")
+      redirect_to("/", :notice => "Follow deleted.")
     else
-      redirect_to(:back, :notice => "Friend request deleted.")
+      redirect_to(:back, :notice => "Follow deleted.")
     end
   end
 end

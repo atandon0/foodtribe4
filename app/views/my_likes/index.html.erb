@@ -18,26 +18,50 @@
           <small> <%= time_ago_in_words(like.content.created_at) %> ago </small>
         </h3>
 
+        <% if like.content.user.id != current_user.id  %>
+        <% arr2 = Array.new  %>
+
+        <% like.content.user.friends_where_receiver.each do |sender| %>
+        <% arr2.push(sender.id) %>
+        <% end %>
+
+        <% if arr2.include?(current_user.id) %>
+
+        <form action="/delete_friend_request/<%= like.content.user.friend_requests_where_receiver.find_by(:sender_id => current_user.id).id  %>">
+          <button class="btn btn-default btn-xs">
+            Don't Follow
+          </button>
+        </form>
+
+        <% else  %>
+
+
         <form action="/create_friend_request" method="post">
           <!-- Hidden input for authenticity token to protect from forgery -->
           <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" %>
-
           <input type="hidden" id="sender_id" name="sender_id" value="<%= current_user.id %>">
-
           <input type="hidden" id="receiver_id" name="receiver_id" value="<%= like.content.user_id %>">
+
 
           <button class="btn btn-default btn-xs">
             Follow
           </button>
+          <% end  %>
+          <% end  %>
         </form>
+        </div>
 
 
-      </div>
+
 
       <div class="panel-body">
-        <h6> <%= like.content.caption %> </h6>
-        <a href="http://localhost:3000/contents/<%= like.content.id %>"> <object style='height: 100%; width: 100%; object-fit: contain' data="<%= like.content.photo_video %>"> </object> </a>
+        <a href="http://localhost:3000/contents/<%= like.content_id %>"> <h6> <%= like.content.caption %> </h6> </a>
 
+        <h6> Filed under:
+          <a href = "/cuisines/<%= like.content.cuisine.id %>"> <%= like.content.cuisine.cuisine_name %></a>,
+          <a href = "/occassions/<%= like.content.occassion.id %>"> <%= like.content.occassion.occassion_name %></a>,
+          <a href = "/special_diets/<%= like.content.special_diet.id %>"> <%= like.content.special_diet.special_diet_name %></a> </h6>
+        <a href="http://localhost:3000/contents/<%= like.content_id %>"> <object style='height: 100%; width: 100%; object-fit: contain' data="<%= like.content.photo_video %>"> </object> </a>
         <% arr = Array.new %>
         <% like.content.fans.each do |fan|  %>
         <% arr.push(fan.username) %>

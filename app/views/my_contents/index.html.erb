@@ -3,13 +3,13 @@
     My Contents
     <a href="/contents/new" class="btn btn-default">New</a>
   </h1>
-</div>  
+</div>
 
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
 
-    <% @contents.each do |content| %>
+    <% @contents.order('created_at desc').each do |content| %>
 
     <div class="panel panel-default">
 
@@ -18,19 +18,39 @@
           <small> <%= time_ago_in_words(content.created_at) %> ago </small>
         </h3>
 
+        <% if content.user.id != current_user.id  %>
+        <% arr2 = Array.new  %>
+
+        <% content.user.friends_where_receiver.each do |sender| %>
+        <% arr2.push(sender.id) %>
+        <% end %>
+
+        <% if arr2.include?(current_user.id) %>
+
+        <form action="/delete_friend_request/<%= content.user.friend_requests_where_receiver.find_by(:sender_id => current_user.id).id  %>">
+          <button class="btn btn-default btn-xs">
+            Don't Follow
+          </button>
+        </form>
+
+        <% else  %>
+
+
         <form action="/create_friend_request" method="post">
           <!-- Hidden input for authenticity token to protect from forgery -->
           <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %>" %>
           <input type="hidden" id="sender_id" name="sender_id" value="<%= current_user.id %>">
           <input type="hidden" id="receiver_id" name="receiver_id" value="<%= content.user_id %>">
 
-          <% if content.user.id != current_user.id  %>
+
           <button class="btn btn-default btn-xs">
             Follow
           </button>
           <% end  %>
+          <% end  %>
         </form>
       </div>
+
 
       <div class="panel-body">
         <a href="http://localhost:3000/contents/<%= content.id %>"> <h6> <%= content.caption %> </h6> </a>

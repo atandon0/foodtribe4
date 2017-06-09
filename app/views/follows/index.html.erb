@@ -13,8 +13,7 @@
 
     <div class="panel panel-default">
       <div class="panel-heading">
-
-        <h3 class="panel-title"> <%= content.user.username %>
+        <h3 class="panel-title"> <a href = "/usersb/<%= content.user.id %>"> <%= content.user.username %> </a>
           <small> <%= time_ago_in_words(content.created_at) %> ago </small>
         </h3>
 
@@ -28,73 +27,78 @@
       </div>
 
       <div class="panel-body">
-        <h6> <%= content.caption %> </h6>
+        <a href="http://localhost:3000/contents/<%= content.id %>"> <h6> <%= content.caption %> </h6> </a>
+
+        <h6> Filed under:
+          <a href = "/cuisines/<%= content.cuisine.id %>"> <%= content.cuisine.cuisine_name %></a>,
+          <a href = "/occassions/<%= content.occassion.id %>"> <%= content.occassion.occassion_name %></a>,
+          <a href = "/special_diets/<%= content.special_diet.id %>"> <%= content.special_diet.special_diet_name %></a> </h6>
         <a href="http://localhost:3000/contents/<%= content.id %>"> <object style='height: 100%; width: 100%; object-fit: contain' data="<%= content.photo_video %>"> </object> </a>
 
-        <% arr = Array.new %>
-        <% content.fans.each do |fan|  %>
-        <% arr.push(fan.username) %>
-        <% end %>
+          <% arr = Array.new %>
+          <% content.fans.each do |fan|  %>
+          <% arr.push(fan.username) %>
+          <% end %>
 
-        <% if arr.include?(current_user.username) %>
+          <% if arr.include?(current_user.username) %>
 
-        <form action = "/delete_like/<%= content.likes.find_by(:user_id => current_user.id).id  %>">
-          <a href="/delete_like/<%= content.likes.find_by(:user_id => current_user.id).id %>" class="btn btn-link">
-            <i class="fa fa-heart"></i></a>
+          <form action = "/delete_like/<%= content.likes.find_by(:user_id => current_user.id).id  %>">
+            <a href="/delete_like/<%= content.likes.find_by(:user_id => current_user.id).id %>" class="btn btn-link">
+              <i class="fa fa-heart"></i></a>
 
-            <% else %>
+              <% else %>
 
-            <form action = "/create_like" method = "post">
-              <!-- Hidden input for authenticity token to protect from forgery -->
-              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+              <form action = "/create_like" method = "post">
+                <!-- Hidden input for authenticity token to protect from forgery -->
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-              <input type="hidden" name="content_id" value= "<%= content.id %>">
-              <input type="hidden" name="user_id" value= "<%= current_user.id %>">
+                <input type="hidden" name="content_id" value= "<%= content.id %>">
+                <input type="hidden" name="user_id" value= "<%= current_user.id %>">
 
-              <button class="btn btn-link">
-                <i class="fa fa-heart-o"></i>
-              </button>
+                <button class="btn btn-link">
+                  <i class="fa fa-heart-o"></i>
+                </button>
 
-              <% end %>
+                <% end %>
 
 
-              <% if arr.count != 0 %>
-              <%= arr.to_sentence %> likes this
-              <% else  %>
-              Be the first to like this!
-              <% end  %>
-            </form>
+                <% if arr.count != 0 %>
+                <%= arr.to_sentence %> likes this
+                <% else  %>
+                Be the first to like this!
+                <% end  %>
+              </form>
 
-            <ul class = "media-list">
+              <ul class = "media-list">
 
-              <% content.comments.each do |comment| %>
-              <li class="media">
-                <div class="media-body">
-                  <h6 class="media-heading">
-                    <a href = "/users/<%= comment.user_id%>"> <%= comment.user.username %> </a>
-                    <small> <%= time_ago_in_words(comment.created_at) %> ago </small>
-                  </h6>
-                  <%= comment.body %>
-                </div>
-              </li>
-              <% end %>
-
-              <h3>
+                <% content.comments.each do |comment| %>
                 <li class="media">
                   <div class="media-body">
-                    <form action="/create_comment" method="post">
-                      <!-- Hidden input for authenticity token to protect from forgery -->
-                      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+                    <h6 class="media-heading">
+                      <a href = "/users/<%= comment.user_id%>"> <%= comment.user.username %> </a>
+                      <small> <%= time_ago_in_words(comment.created_at) %> ago </small>
+                    </h6>
+                    <%= comment.body %>
+                  </div>
+                </li>
+                <% end %>
 
-                      <input type="hidden" name="content_id" value=<%= content.id %>>
+                <h3>
+                  <li class="media">
+                    <div class="media-body">
+                      <form action="/create_comment" method="post">
+                        <!-- Hidden input for authenticity token to protect from forgery -->
+                        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-                      <input type="hidden" name="user_id" value=<%= current_user.id %>>
+                        <input type="hidden" name="content_id" value=<%= content.id %>>
 
-                      <!-- Label and input for body -->
-                      <div class="form-group">
-                        <label for="body" class="sr-only">
-                          Body
-                        </label>
+                        <input type="hidden" name="user_id" value=<%= current_user.id %>>
+
+                        <!-- Label and input for body -->
+                        <div class="form-group">
+                          <label for="body" class="sr-only">
+                            Body
+                          </label>
 
                           <div class="input-group">
                             <input type="text" id="body" name="body" class="form-control" placeholder="Add a comment..." required>
