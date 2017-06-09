@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
     save_status = @comment.save
 
     if save_status == true
-      redirect_to("/", :notice => "Comment created successfully.")
+      redirect_to("/contents/#{@comment.content_id}", :notice => "Comment created successfully.")
     else
       render("comments/new.html.erb")
     end
@@ -49,7 +49,7 @@ class CommentsController < ApplicationController
     save_status = @comment.save
 
     if save_status == true
-      redirect_to("/comments/#{@comment.id}", :notice => "Comment updated successfully.")
+      redirect_to("/contents/#{@comment.content_id}", :notice => "Comment updated successfully.")
     else
       render("comments/edit.html.erb")
     end
@@ -60,7 +60,7 @@ class CommentsController < ApplicationController
 
     @comment.destroy
 
-    if URI(request.referer).path == "/comments/#{@comment.id}"
+    if URI(request.referer).path == "/contents/#{@comment.content_id}"
       redirect_to("/", :notice => "Comment deleted.")
     else
       redirect_to(:back, :notice => "Comment deleted.")

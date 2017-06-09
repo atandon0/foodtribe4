@@ -26,7 +26,7 @@ class LikesController < ApplicationController
     save_status = @like.save
 
     if save_status == true
-      redirect_to("/", :notice => "Liked!")
+      redirect_to("/contents/#{@like.content_id}", :notice => "Liked!")
     else
       render("likes/new.html.erb")
     end
@@ -47,7 +47,7 @@ class LikesController < ApplicationController
     save_status = @like.save
 
     if save_status == true
-      redirect_to("/likes/#{@like.id}", :notice => "Like updated successfully.")
+      redirect_to("/contents/#{@like.content_id}", :notice => "Like updated successfully.")
     else
       render("likes/edit.html.erb")
     end
@@ -59,7 +59,7 @@ class LikesController < ApplicationController
     @like.destroy
 
     if URI(request.referer).path == "/likes/#{@like.id}"
-      redirect_to("/", :notice => "Like deleted.")
+      redirect_to("/contents/#{@like.content_id}", :notice => "Like deleted.")
     else
       redirect_to(:back, :notice => "Like deleted.")
     end
