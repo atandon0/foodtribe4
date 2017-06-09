@@ -26,7 +26,7 @@ class FriendRequestsController < ApplicationController
     save_status = @friend_request.save
 
     if save_status == true
-      redirect_to("/friend_requests/#{@friend_request.id}", :notice => "Friend request created successfully.")
+      redirect_to("/follows", :notice => "Friend request created successfully.")
     else
       render("friend_requests/new.html.erb")
     end

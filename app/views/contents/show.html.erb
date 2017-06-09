@@ -93,30 +93,27 @@
                             Body
                           </label>
 
-                          <form action = "/create_comment" method = "post">
-                            <!-- Hidden input for authenticity token to protect from forgery -->
-                            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-                            <input type="hidden" name="content_id" value="<%= @content.id %>">
-                            <input type="hidden" name="user_id" value="<%= current_user.id %>">
+                          <div class="input-group">
+                            <input type="text" id="body" name="body" class="form-control" placeholder="Add a comment..." required>
 
-                            <div class="input-group">
-                              <input type="text" id="body" name="body" class="form-control" placeholder="Add a comment..." required>
-
-                              <span class="input-group-btn">
-                                <button class="btn btn-success">
-                                  <i class="fa fa-commenting-o"></i>
-                                </button>
-                              </span>
-                            </div><!-- /input-group -->
-                          </form>
+                            <span class="input-group-btn">
+                              <button class="btn btn-success">
+                                <i class="fa fa-commenting-o"></i>
+                              </button>
+                            </span>
+                          </div><!-- /input-group -->
                         </div>
+                      </form>
+                    </div>
+                  </li>
+                </h3>
+              </ul>
 
-                      </div>
-                    </li>
-                  </h3>
-                </ul>
+              <div class="btn-group btn-group-justified">
+                <a href="/contents" class="btn btn-primary">
+                  Back
+                </a>
 
-                <div>
                 <% if current_user.id == @content.user_id %>
                 <a href="/contents/<%= @content.id %>/edit" class="btn btn-warning">
                   Edit
@@ -128,7 +125,7 @@
                 </a>
               </div>
 
-              </div>
             </div>
           </div>
         </div>
+      </div>

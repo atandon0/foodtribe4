@@ -2,37 +2,13 @@
   <h3><%= @special_diet.special_diet_name %></h3>
 </div>
 
-<div class="row">
-  <div class="col-md-12 mb-2">
-    <dl class="dl-horizontal">
-      <dt>Special diet name</dt>
-      <dd><%= @special_diet.special_diet_name %></dd>
-
-      <dt>Photo</dt>
-      <dd><%= @special_diet.photo %></dd>
-
-    </dl>
-
-    <div class="btn-group btn-group-justified">
-      <a href="/special_diets" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/special_diets/<%= @special_diet.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_special_diet/<%= @special_diet.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
-    </div>
-  </div>
-</div>
 
 
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
 
-    <% @special_diet.contents.each do |content| %>
+    <% @special_diet.contents.order('created_at desc').each do |content| %>
 
     <div class="panel panel-default">
 
@@ -120,31 +96,26 @@
                             Body
                           </label>
 
-                          <form action = "/create_comment" method = "post">
-                            <!-- Hidden input for authenticity token to protect from forgery -->
-                            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-                            <input type="hidden" name="content_id" value=<%= content.id %>>
-                            <input type="hidden" name="user_id" value=<%= current_user.id %>>
+                          <div class="input-group">
+                            <input type="text" id="body" name="body" class="form-control" placeholder="Add a comment..." required>
 
-                            <div class="input-group">
-                              <input type="text" id="body" name="body" class="form-control" placeholder="Add a comment..." required>
+                            <span class="input-group-btn">
+                              <button class="btn btn-success">
+                                <i class="fa fa-commenting-o"></i>
+                              </button>
+                            </span>
+                          </div><!-- /input-group -->
 
-                              <span class="input-group-btn">
-                                <button class="btn btn-success">
-                                  <i class="fa fa-commenting-o"></i>
-                                </button>
-                              </span>
-                            </div><!-- /input-group -->
-                          </form>
                         </div>
-                      </div>
-                    </li>
-                  </h3>
-                </ul>
-              </div>
+                      </form>
+                    </div>
+                  </li>
+                </h3>
+              </ul>
             </div>
-
-            <% end  %>
-
           </div>
+
+          <% end  %>
+
         </div>
+      </div>

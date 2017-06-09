@@ -1,6 +1,6 @@
 class ContentsController < ApplicationController
   def index
-    @contents = Content.order('created_at desc')
+    @contents = Content.all
 
     render("contents/index.html.erb")
   end
