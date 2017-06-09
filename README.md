@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Video/Screencast link: https://drive.google.com/file/d/0B0ta9HoLkF-6UGt1cy04WWhPZkU/view
 
-Things you may want to cover:
+* GitHub/Repo link: https://github.com/atandon0/foodtribe4
 
-* Ruby version
+* Development Board/GitHub project link: https://github.com/atandon0/foodtribe4/projects/1
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* FirstDraft Ideas link: https://ideas.firstdraft.com/ideas/972
